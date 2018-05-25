@@ -1,0 +1,26 @@
+{
+  "name": "aimes/module-product-gallery",
+  "description": "A Magento 2 module to replace the default Fotorama gallery",
+  "type": "magento2-module",
+  "version": "1.0.0",
+  "license": [
+    "OSL-3.0",
+    "AFL-3.0"
+  ],
+  "authors": [
+    {
+      "name": "Rob Aimes",
+      "email": "rob@aimes.eu",
+      "homepage": "https://aimes.eu"
+    }
+  ],
+  "require": {
+    "magento/module-catalog": "~101.0.0^"
+  },
+  "autoload": {
+    "files": [ "registration.php" ],
+    "psr-4": {
+      "Aimes\\ProductGallery\\": ""
+    }
+  }
+}
