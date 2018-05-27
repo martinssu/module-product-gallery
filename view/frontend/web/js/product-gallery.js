@@ -17,9 +17,10 @@ define([
         },
 
         _init: function () {
-            console.log(this.options.initialImages);
             this.setupGalleryPreview();
             this.setupGalleryNav();
+
+            window.initialImages = this.options.initialImages;
         },
 
         setupGalleryPreview: function () {
@@ -27,7 +28,7 @@ define([
                 slidesToShow: 1,
                 slidesToScroll: 1,
                 arrows: true,
-                dots: false,
+                dots: true,
                 fade: false,
                 asNavFor: this.options.galleryNavElement,
                 lazyLoad: 'ondemand',
