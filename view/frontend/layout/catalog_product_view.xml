@@ -9,6 +9,7 @@
     <head> <!-- TODO: Remove this before release, included in _module.less -->
         <css src="Aimes_ProductGallery::css/source/flickity/flickity.min.css"/>
         <css src="Aimes_ProductGallery::css/source/flickity/fullscreen.css"/>
+        <css src="Aimes_ProductGallery::css/source/flickity/custom.css"/>
     </head>
     <body>
         <!-- Add custom gallery by redefining the block, replacing Fotorama -->

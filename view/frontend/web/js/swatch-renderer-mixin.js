@@ -29,28 +29,37 @@ define([
                         images = this.options.mediaGalleryInitial;
                     }
 
-                    //this._reloadGalleryImages();
+                    this._reloadGalleryImages();
                     this._updateProductGallery(images);
                 }
             },
 
+            /*
+             * Reload the gallery with the new images.
+             *
+             * Since Flickity moves the images inside it's own markup, knockout
+             * no longer recognises it and cannot track dependencies or data changes.
+             *
+             * Due to this, we need to remove any old images or they remain in the
+             * slider indefinitely.
+             */
+            _reloadGalleryImages: function () {
+                $('.flickity-slider .gallery-cell').remove();
+                $('#gallery-preview').flickity('destroy');
+                $('#gallery-nav').flickity('destroy');
+            },
+
+            /*
+             * Give knockout the new image data and reinitialise gallery settings
+             */
             _updateProductGallery: function (images) {
                 var GalleryModel = new galleryModel();
 
-                typeof images[0].isMain !== 'undefined' ? GalleryModel.galleryImages(images) : GalleryModel.galleryImages(ko.dataFor($('#gallery-preview').get(0)).initialImages);
-            },
+                typeof images[0].isMain !== 'undefined'
+                    ? GalleryModel.galleryImages(images)
+                    : GalleryModel.galleryImages(ko.dataFor($('#gallery-preview').get(0)).initialImages);
 
-            _reloadGalleryImages: function () {
-                // jQuery Bridget is packaged within flickity
-                // Load plugins that extend Flickity object
-                require([
-                    'jquery-bridget/jquery-bridget',
-                ], function(jQueryBridget) {
-                    jQueryBridget( 'flickity', Flickity, $ );
-
-                    $('#gallery-preview').flickity('destroy');
-                    $('#gallery-nav').flickity('destroy');
-                });
+                gallery(); // Re-initialise flickity due to comment above
             }
         });
 

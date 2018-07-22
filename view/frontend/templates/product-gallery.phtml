@@ -8,15 +8,11 @@
  */
 ?>
 <div id="gallery-container" class="product-media loading" style="position: relative;" data-bind="scope: 'product-gallery'">
-    <div id="gallery-preview" class="gallery-preview">
-        <!-- ko foreach: { data: galleryImages, as: 'image' } -->
-            <div class="gallery-cell" style="width: 100%;"><img data-bind="attr: { src: image.full, alt: image.caption }"/></div>
-        <!-- /ko -->
+    <div id="gallery-preview" class="gallery-preview" data-bind="foreach: { data: galleryImages, as: 'image' }">
+        <div class="gallery-cell initial" style="width: 100%;"><img data-bind="attr: { 'data-flickity-lazyload': image.full, alt: image.caption }"/></div>
     </div>
-    <div id="gallery-nav" class="gallery-nav">
-        <!-- ko foreach: { data: galleryImages, as: 'image' } -->
-            <div class="gallery-cell" style="width: 100%;"><img data-bind="attr: { src: image.thumb, alt: image.caption }"/></div>
-        <!-- /ko -->
+    <div id="gallery-nav" class="gallery-nav" data-bind="foreach: { data: galleryImages, as: 'image' }">
+        <div class="gallery-cell initial" style="width: 100%;"><img data-bind="attr: { 'data-flickity-lazyload': image.thumb, alt: image.caption }"/></div>
     </div>
 </div>
 <script type="text/x-magento-init">

@@ -1,0 +1,25 @@
+.gallery-preview.is-fullscreen {
+    z-index: 100;
+}
+
+.gallery-preview.is-fullscreen .flickity-slider img {
+    max-height: 100vh;
+    display: block;
+    margin: 0 auto;
+}
+
+.flickity-fullscreen-button {
+    
+}
+
+.flickity-fullscreen-button svg path {
+
+}
+
+.flickity-fullscreen-button-view {
+
+}
+
+.flickity-fullscreen-button-exit {
+
+}

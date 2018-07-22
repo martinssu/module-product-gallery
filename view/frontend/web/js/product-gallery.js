@@ -36,7 +36,8 @@ define([
             var self = this;
 
             $(self.options.galleryPreviewElement).flickity({
-                fullscreen: true
+                fullscreen: true,
+                lazyLoad: true
             });
         },
 
@@ -44,7 +45,8 @@ define([
             var self = this;
 
             $(self.options.galleryNavElement).flickity({
-                sync: '#gallery-preview'
+                sync: '#gallery-preview',
+                lazyLoad: true
             });
         }
     });
