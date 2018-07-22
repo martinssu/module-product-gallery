@@ -1,8 +1,10 @@
 define([
     'jquery',
+    'ko',
     'aimes/productGallery',
-    'slick'
-], function ($, gallery) {
+    'Aimes_ProductGallery/js/model/gallery',
+    'Aimes_ProductGallery/js/lib/flickity/flickity.pkgd.min'
+], function ($, ko, gallery, galleryModel, Flickity) {
     'use strict';
 
     return function (widget) {
@@ -15,8 +17,6 @@ define([
 
             _init: function () {
                 this._super();
-
-                this.options.mediaGalleryInitial = window.initialImages;
             },
 
             _loadMedia: function (eventName) {
@@ -29,24 +29,28 @@ define([
                         images = this.options.mediaGalleryInitial;
                     }
 
+                    //this._reloadGalleryImages();
                     this._updateProductGallery(images);
                 }
             },
 
             _updateProductGallery: function (images) {
-                var self = this;
+                var GalleryModel = new galleryModel();
 
-                $(this.options.galleryPreviewElement).slick('unslick').empty();
-                $(this.options.galleryNavElement).slick('unslick').empty();
+                typeof images[0].isMain !== 'undefined' ? GalleryModel.galleryImages(images) : GalleryModel.galleryImages(ko.dataFor($('#gallery-preview').get(0)).initialImages);
+            },
 
-                $.each(images, function (index, value) {
-                    $('<div><img data-lazy="' + value.img + '" alt="' + value.caption + '"/></div>')
-                        .appendTo(self.options.galleryPreviewElement);
-                    $('<div><img data-lazy="' + value.thumb + '" alt="' + value.caption + '"/></div>')
-                        .appendTo(self.options.galleryNavElement);
+            _reloadGalleryImages: function () {
+                // jQuery Bridget is packaged within flickity
+                // Load plugins that extend Flickity object
+                require([
+                    'jquery-bridget/jquery-bridget',
+                ], function(jQueryBridget) {
+                    jQueryBridget( 'flickity', Flickity, $ );
+
+                    $('#gallery-preview').flickity('destroy');
+                    $('#gallery-nav').flickity('destroy');
                 });
-
-                gallery();
             }
         });
 

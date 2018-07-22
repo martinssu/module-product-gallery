@@ -1,51 +1,50 @@
 /**
  * Copyright © Rob Aimes - https://aimes.eu
  */
-
 define([
     'jquery',
-    'slick'
-], function ($) {
+    'ko',
+    'Aimes_ProductGallery/js/lib/flickity/flickity.pkgd.min', // Using map doesn't work..?
+], function ($, ko, Flickity) {
     'use strict';
 
     $.widget('aimes.productGallery', {
 
         options: {
             galleryPreviewElement: '#gallery-preview',
-            galleryNavElement: '#gallery-nav',
-            initialImages: {}
+            galleryNavElement: '#gallery-nav'
         },
 
         _init: function () {
-            this.setupGalleryPreview();
-            this.setupGalleryNav();
+            var self = this;
 
-            window.initialImages = this.options.initialImages;
+            // jQuery Bridget is packaged within flickity
+            // Load plugins that extend Flickity object
+            require([
+                'jquery-bridget/jquery-bridget',
+                'Aimes_ProductGallery/js/lib/flickity/plugin/sync',
+                'Aimes_ProductGallery/js/lib/flickity/plugin/fullscreen'
+            ], function(jQueryBridget) {
+                jQueryBridget( 'flickity', Flickity, $ );
+
+                self.setupGalleryPreview();
+                self.setupGalleryNav();
+            });
         },
 
         setupGalleryPreview: function () {
-            $(this.options.galleryPreviewElement).not('.slick-initialized').slick({
-                slidesToShow: 1,
-                slidesToScroll: 1,
-                arrows: true,
-                dots: true,
-                fade: false,
-                asNavFor: this.options.galleryNavElement,
-                lazyLoad: 'ondemand',
-                infinite: false
+            var self = this;
+
+            $(self.options.galleryPreviewElement).flickity({
+                fullscreen: true
             });
         },
 
         setupGalleryNav: function () {
-            $(this.options.galleryNavElement).not('.slick-initialized').slick({
-                slidesToShow: 3,
-                slidesToScroll: 1,
-                asNavFor: this.options.galleryPreviewElement,
-                dots: false,
-                focusOnSelect: true,
-                centerMode: true,
-                lazyLoad: 'ondemand',
-                infinite: false
+            var self = this;
+
+            $(self.options.galleryNavElement).flickity({
+                sync: '#gallery-preview'
             });
         }
     });

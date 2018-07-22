@@ -77,7 +77,7 @@ class Gallery extends Template
      *
      * $images \Magento\Framework\Data\Collection
      */
-    public function getProductImages()
+    private function getProductImages()
     {
         $imageArr = [];
         $images = $this->getProduct()->getMediaGalleryImages();

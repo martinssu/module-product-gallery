@@ -1,7 +1,7 @@
 define([
     'jquery',
     'aimes/productGallery',
-    'slick'
+    //'flickity'
 ], function ($, gallery) {
     'use strict';
 
