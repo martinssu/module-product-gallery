@@ -1,25 +1,47 @@
+.gallery-container {
+    position: relative;
+}
+
+.gallery-preview .flickity-page-dots {
+    bottom: -20px;
+}
+
+.gallery-preview .flickity-page-dots .dot {
+    height: 16px;
+    width: 16px;
+}
+
+.gallery-nav {
+    margin-top: 25px;
+}
+
 .gallery-preview.is-fullscreen {
     z-index: 100;
+}
+
+.gallery-preview.is-fullscreen .gallery-cell {
+    display: flex;
 }
 
 .gallery-preview.is-fullscreen .flickity-slider img {
     max-height: 100vh;
     display: block;
-    margin: 0 auto;
+    margin: auto;
 }
 
-.flickity-fullscreen-button {
-    
+.gallery-preview .gallery-cell {
+    width: 100%;
+    margin-right: 10px;
 }
 
-.flickity-fullscreen-button svg path {
-
+.gallery-nav .gallery-cell {
+    margin-right: 10px;
 }
 
-.flickity-fullscreen-button-view {
-
+.gallery-nav .gallery-cell img {
+    cursor: pointer;
 }
 
-.flickity-fullscreen-button-exit {
-
+.gallery-nav .gallery-cell.is-selected {
+    border: 1px solid red;
 }

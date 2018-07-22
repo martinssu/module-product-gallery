@@ -25,17 +25,13 @@ define([
                 }  else {
                     var images = this.options.jsonConfig.images[this.getProduct()];
 
-                    if (!images) {
-                        images = this.options.mediaGalleryInitial;
-                    }
-
                     this._reloadGalleryImages();
                     this._updateProductGallery(images);
                 }
             },
 
             /*
-             * Reload the gallery with the new images.
+             * Reload the gallery to prepare for the new images.
              *
              * Since Flickity moves the images inside it's own markup, knockout
              * no longer recognises it and cannot track dependencies or data changes.
@@ -55,7 +51,7 @@ define([
             _updateProductGallery: function (images) {
                 var GalleryModel = new galleryModel();
 
-                typeof images[0].isMain !== 'undefined'
+               images
                     ? GalleryModel.galleryImages(images)
                     : GalleryModel.galleryImages(ko.dataFor($('#gallery-preview').get(0)).initialImages);
 

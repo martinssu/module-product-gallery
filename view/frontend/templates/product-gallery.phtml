@@ -7,12 +7,12 @@
  * @var $block \Aimes\ProductGallery\Block\Gallery
  */
 ?>
-<div id="gallery-container" class="product-media loading" style="position: relative;" data-bind="scope: 'product-gallery'">
+<div id="gallery-container" class="product-media loading" data-bind="scope: 'product-gallery'">
     <div id="gallery-preview" class="gallery-preview" data-bind="foreach: { data: galleryImages, as: 'image' }">
-        <div class="gallery-cell initial" style="width: 100%;"><img data-bind="attr: { 'data-flickity-lazyload': image.full, alt: image.caption }"/></div>
+        <div class="gallery-cell"><img data-bind="attr: { 'data-flickity-lazyload': image.full, alt: image.caption }"/></div>
     </div>
     <div id="gallery-nav" class="gallery-nav" data-bind="foreach: { data: galleryImages, as: 'image' }">
-        <div class="gallery-cell initial" style="width: 100%;"><img data-bind="attr: { 'data-flickity-lazyload': image.thumb, alt: image.caption }"/></div>
+        <div class="gallery-cell"><img data-bind="attr: { 'data-flickity-lazyload': image.thumb, alt: image.caption }"/></div>
     </div>
 </div>
 <script type="text/x-magento-init">

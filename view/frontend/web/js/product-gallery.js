@@ -12,7 +12,8 @@ define([
 
         options: {
             galleryPreviewElement: '#gallery-preview',
-            galleryNavElement: '#gallery-nav'
+            galleryNavElement: '#gallery-nav',
+            galleryCellSelector: '.gallery-cell'
         },
 
         _init: function () {
@@ -37,7 +38,11 @@ define([
 
             $(self.options.galleryPreviewElement).flickity({
                 fullscreen: true,
-                lazyLoad: true
+                sync: '#gallery-nav',
+                lazyLoad: true,
+                imagesLoaded: true,
+                wrapAround: true,
+                cellSelector: self.options.galleryCellSelector
             });
         },
 
@@ -45,9 +50,26 @@ define([
             var self = this;
 
             $(self.options.galleryNavElement).flickity({
-                sync: '#gallery-preview',
-                lazyLoad: true
+                sync: self.options.galleryPreviewElement,
+                lazyLoad: 2,
+                pageDots: false,
+                imagesLoaded: true,
+                cellSelector: self.options.galleryCellSelector,
+                contain: true, // Prevent misalignment
+                cellAlign: 'left'
             });
+
+            self._setupNavClicks();
+        },
+
+        _setupNavClicks: function () {
+            $(self.options.galleryNavElement).on('staticClick.flickity',
+                function(event, pointer, cellElement, cellIndex) {
+                    if (cellElement) {
+                        $(self.options.galleryPreviewElement).flickity('select', cellIndex);
+                    }
+                }
+            );
         }
     });
 
