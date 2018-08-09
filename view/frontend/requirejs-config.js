@@ -5,8 +5,8 @@
 var config = {
     map: {
         '*': {
-            "slick": "Aimes_ProductGallery/js/lib/slick.min",
-            "aimes/productGallery": "Aimes_ProductGallery/js/product-gallery"
+            'aimes/product-gallery': 'Aimes_ProductGallery/js/product-gallery',
+            'aimes/gallery-model': 'Aimes_ProductGallery/js/model/gallery'
         }
     },
     config: {

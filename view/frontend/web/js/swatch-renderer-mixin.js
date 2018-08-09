@@ -1,8 +1,10 @@
 define([
     'jquery',
-    'aimes/productGallery',
-    'slick'
-], function ($, gallery) {
+    'ko',
+    'aimes/product-gallery',
+    'aimes/gallery-model',
+    'Aimes_ProductGallery/js/lib/flickity/flickity.pkgd.min'
+], function ($, ko, gallery, galleryModel) {
     'use strict';
 
     return function (widget) {
@@ -15,8 +17,6 @@ define([
 
             _init: function () {
                 this._super();
-
-                this.options.mediaGalleryInitial = window.initialImages;
             },
 
             _loadMedia: function (eventName) {
@@ -25,28 +25,37 @@ define([
                 }  else {
                     var images = this.options.jsonConfig.images[this.getProduct()];
 
-                    if (!images) {
-                        images = this.options.mediaGalleryInitial;
-                    }
-
+                    this._reloadGalleryImages();
                     this._updateProductGallery(images);
                 }
             },
 
+            /*
+             * Reload the gallery to prepare for the new images.
+             *
+             * Since Flickity moves the images inside it's own markup, knockout
+             * no longer recognises it and cannot track dependencies or data changes.
+             *
+             * Due to this, we need to remove any old images or they remain in the
+             * slider indefinitely.
+             */
+            _reloadGalleryImages: function () {
+                $('.flickity-slider .gallery-cell').remove();
+                $(this.options.galleryPreviewElement).flickity('destroy');
+                $(this.options.galleryNavElement).flickity('destroy');
+            },
+
+            /*
+             * Give knockout the new image data and reinitialise gallery settings
+             */
             _updateProductGallery: function (images) {
-                var self = this;
+                var GalleryModel = new galleryModel();
 
-                $(this.options.galleryPreviewElement).slick('unslick').empty();
-                $(this.options.galleryNavElement).slick('unslick').empty();
+                images
+                    ? GalleryModel.galleryImages(images)
+                    : GalleryModel.galleryImages(ko.dataFor($(self.options.galleryPreviewElement).get(0)).initialImages);
 
-                $.each(images, function (index, value) {
-                    $('<div><img data-lazy="' + value.img + '" alt="' + value.caption + '"/></div>')
-                        .appendTo(self.options.galleryPreviewElement);
-                    $('<div><img data-lazy="' + value.thumb + '" alt="' + value.caption + '"/></div>')
-                        .appendTo(self.options.galleryNavElement);
-                });
-
-                gallery();
+                gallery(); // Re-initialise flickity due to comment above
             }
         });
 

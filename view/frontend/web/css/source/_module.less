@@ -2,3 +2,99 @@
  * Copyright © Rob Aimes - https://aimes.eu
  * ----------------------------------------
  */
+
+// Import flickity library styles
+@import "flickity/flickity.min.css";
+@import "flickity/fullscreen.min.css";
+
+/*---------
+  Variables
+  --------- */
+@nav-dot-width: 16px;
+@nav-dot-height: 16px;
+@gallery-preview-max-height: 600px; // This limits the height of the preview section
+@gallery-nav-image-height: 110px; // Height of the nav - 110px is default thumbnail sizing
+@gallery-nav-cell-width: 25%; // How many thumbnails to display in the nav as a percentage - 25% = 4, 50% = 2 etc... Can use px values if the nav JS uses 'percentPosition: false'
+
+.gallery-container {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+
+  &.loading {
+    // Set some base styles and add a spinner / loader
+  }
+}
+
+.gallery-preview {
+  flex: 0 1 100%;
+
+  .flickity-page-dots {
+    bottom: -20px;
+
+    .dot {
+      width: @nav-dot-width;
+      height: @nav-dot-height;
+    }
+  }
+}
+
+.gallery-nav {
+  flex: 0 1 100%;
+  margin-top: calc(@nav-dot-height + 10px);
+
+  .flickity-viewport {
+    height: @gallery-nav-image-height;
+  }
+
+  .gallery-cell {
+    width: @gallery-nav-cell-width;
+    text-align: center;
+
+    &.is-selected {
+      border: 1px solid red;
+      margin: 0;
+      height: 100%;
+      box-sizing: border-box;
+
+      img {
+        box-sizing: border-box;
+      }
+    }
+
+    img {
+      cursor: pointer;
+      height: 100%;
+    }
+  }
+
+  &.is-fullscreen {
+    z-index: 100;
+
+    .gallery-cell {
+      display: flex;
+      height: 100%;
+    }
+  }
+}
+
+.gallery-preview {
+  .gallery-cell {
+    width: 100%;
+    text-align: center;
+
+    img {
+      max-height: @gallery-preview-max-height;
+    }
+  }
+
+  &.is-fullscreen {
+    .flickity-slider {
+      img {
+        max-height: 100vh;
+        display: block;
+        margin: auto;
+      }
+    }
+  }
+}

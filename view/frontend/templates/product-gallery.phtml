@@ -7,15 +7,33 @@
  * @var $block \Aimes\ProductGallery\Block\Gallery
  */
 ?>
-<div id="gallery-container" class="product-media" data-mage-init='{ "aimes/productGallery": { "initialImages": <?= $block->getJsImages() ?> } }' style="position: relative;">
-    <div id="gallery-preview" class="gallery-preview">
-        <?php foreach ($block->getProductImages() as $image): ?>
-            <div><img data-lazy="<?= $image['img'] ?>" alt="<?= $image['caption'] ?>"/></div>
-        <?php endforeach; ?>
+<div id="gallery-container" class="gallery-container product-media loading" data-bind="scope: 'product-gallery'">
+    <div id="gallery-preview" class="gallery-preview" data-bind="foreach: { data: galleryImages, as: 'image' }">
+        <div class="gallery-cell"><img data-bind="attr: { 'data-flickity-lazyload': image.full, alt: image.caption }"/></div>
     </div>
-    <div id="gallery-nav" class="gallery-nav">
-        <?php foreach ($block->getProductImages() as $image): ?>
-            <div><img data-lazy="<?= $image['thumb'] ?>" alt="<?= $image['caption'] ?>"/></div>
-        <?php endforeach; ?>
+    <div id="gallery-nav" class="gallery-nav" data-bind="foreach: { data: galleryImages, as: 'image' }">
+        <div class="gallery-cell"><img data-bind="attr: { 'data-flickity-lazyload': image.thumb, alt: image.caption }"/></div>
     </div>
 </div>
+<script type="text/x-magento-init">
+   {
+       "*": {
+           "Magento_Ui/js/core/app": {
+               "components": {
+                   "product-gallery": {
+                       "component": "Aimes_ProductGallery/js/model/gallery",
+                       "initialImages": <?= $block->getJsImages() ?>
+                   }
+               }
+           }
+       }
+   }
+</script>
+<script type="text/x-magento-init">
+    {
+        "#gallery-container": {
+            "aimes/product-gallery": {
+            }
+        }
+    }
+</script>
