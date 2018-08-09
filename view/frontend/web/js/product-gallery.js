@@ -63,6 +63,8 @@ define([
         },
 
         _setupNavClicks: function () {
+            var self = this;
+
             $(self.options.galleryNavElement).on('staticClick.flickity',
                 function(event, pointer, cellElement, cellIndex) {
                     if (cellElement) {

@@ -41,8 +41,8 @@ define([
              */
             _reloadGalleryImages: function () {
                 $('.flickity-slider .gallery-cell').remove();
-                $('#gallery-preview').flickity('destroy');
-                $('#gallery-nav').flickity('destroy');
+                $(this.options.galleryPreviewElement).flickity('destroy');
+                $(this.options.galleryNavElement).flickity('destroy');
             },
 
             /*
