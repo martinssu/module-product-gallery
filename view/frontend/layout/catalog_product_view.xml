@@ -8,7 +8,7 @@
       xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <head> <!-- TODO: REMOVE THIS. Included in _module.less -->
         <css src="Aimes_ProductGallery::css/source/flickity/flickity.min.css"/>
-        <css src="Aimes_ProductGallery::css/source/flickity/fullscreen.css"/>
+        <css src="Aimes_ProductGallery::css/source/flickity/fullscreen.min.css"/>
         <css src="Aimes_ProductGallery::css/source/flickity/custom.css"/>
     </head>
     <body>

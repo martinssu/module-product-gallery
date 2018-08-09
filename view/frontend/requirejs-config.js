@@ -5,7 +5,7 @@
 var config = {
     map: {
         '*': {
-            'aimes/productGallery': 'Aimes_ProductGallery/js/product-gallery',
+            'aimes/product-gallery': 'Aimes_ProductGallery/js/product-gallery',
             'aimes/gallery-model': 'Aimes_ProductGallery/js/model/gallery'
         }
     },

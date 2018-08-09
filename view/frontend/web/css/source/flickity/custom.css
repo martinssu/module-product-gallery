@@ -1,5 +1,17 @@
 .gallery-container {
     position: relative;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.gallery-container.loading {
+    background: red;
+    height: 100%;
+    width: 100%;
+}
+
+.gallery-preview {
+    flex: 0 1 100%;
 }
 
 .gallery-preview .flickity-page-dots {
@@ -12,7 +24,12 @@
 }
 
 .gallery-nav {
+    flex: 0 1 100%;
     margin-top: 25px;
+}
+
+.gallery-nav .flickity-viewport {
+    height: 110px; /* Height of the nav - 110px is default thumbnail sizing */
 }
 
 .gallery-preview.is-fullscreen {
@@ -21,6 +38,7 @@
 
 .gallery-preview.is-fullscreen .gallery-cell {
     display: flex;
+    height: 100%;
 }
 
 .gallery-preview.is-fullscreen .flickity-slider img {
@@ -32,16 +50,41 @@
 .gallery-preview .gallery-cell {
     width: 100%;
     margin-right: 10px;
+    text-align: center;
+}
+
+
+.gallery-preview .gallery-cell img {
+    max-height: 600px; /* This limits the height of the preview section */
 }
 
 .gallery-nav .gallery-cell {
-    margin-right: 10px;
+    width: 50%; /* How many thumbnails to display in the nav? Eg. 25% = 4 */
+    text-align: center;
 }
 
 .gallery-nav .gallery-cell img {
     cursor: pointer;
+    height: 100%;
 }
 
 .gallery-nav .gallery-cell.is-selected {
     border: 1px solid red;
+    margin: 0;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.gallery-nav .gallery-cell.is-selected img {
+    box-sizing: border-box;
+}
+
+.gallery-nav.vertical {
+    transform: rotate(90deg);
+    align-self: center;
+}
+
+.gallery-nav.vertical .gallery-cell {
+    transform: rotate(-90deg);
+    margin: 20px 0;
 }

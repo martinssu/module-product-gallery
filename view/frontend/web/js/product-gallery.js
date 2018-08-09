@@ -11,6 +11,7 @@ define([
     $.widget('aimes.productGallery', {
 
         options: {
+            galleryContainerElement: '#gallery-container',
             galleryPreviewElement: '#gallery-preview',
             galleryNavElement: '#gallery-nav',
             galleryCellSelector: '.gallery-cell'
@@ -28,8 +29,12 @@ define([
             ], function(jQueryBridget) {
                 jQueryBridget( 'flickity', Flickity, $ );
 
+                $(self.options.galleryContainerElement).addClass('loading');
+
                 self.setupGalleryPreview();
                 self.setupGalleryNav();
+
+                self._onLoaded();
             });
         },
 
@@ -56,7 +61,10 @@ define([
                 imagesLoaded: true,
                 cellSelector: self.options.galleryCellSelector,
                 contain: true, // Prevent misalignment
-                cellAlign: 'left'
+                cellAlign: 'left',
+                draggable: false,
+                setGallerySize: false,
+                percentPosition: true // Change to false to use px values in styling
             });
 
             self._setupNavClicks();
@@ -72,6 +80,15 @@ define([
                     }
                 }
             );
+        },
+
+        _onLoaded: function () {
+            $(this.options.galleryContainerElement).removeClass('loading');
+            $(this.options.galleryContainerElement).trigger('galleryLoaded');
+        },
+
+        onLoaded: function () {
+
         }
     });
 

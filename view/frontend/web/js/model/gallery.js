@@ -17,6 +17,5 @@ define([
             this._super();
             this.galleryImages(self.initialImages);
         }
-
     });
 });

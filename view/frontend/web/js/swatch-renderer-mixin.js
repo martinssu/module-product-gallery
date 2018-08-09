@@ -1,10 +1,10 @@
 define([
     'jquery',
     'ko',
-    'aimes/productGallery',
-    'Aimes_ProductGallery/js/model/gallery',
+    'aimes/product-gallery',
+    'aimes/gallery-model',
     'Aimes_ProductGallery/js/lib/flickity/flickity.pkgd.min'
-], function ($, ko, gallery, galleryModel, Flickity) {
+], function ($, ko, gallery, galleryModel) {
     'use strict';
 
     return function (widget) {
@@ -51,9 +51,9 @@ define([
             _updateProductGallery: function (images) {
                 var GalleryModel = new galleryModel();
 
-               images
+                images
                     ? GalleryModel.galleryImages(images)
-                    : GalleryModel.galleryImages(ko.dataFor($('#gallery-preview').get(0)).initialImages);
+                    : GalleryModel.galleryImages(ko.dataFor($(self.options.galleryPreviewElement).get(0)).initialImages);
 
                 gallery(); // Re-initialise flickity due to comment above
             }

@@ -7,7 +7,7 @@
  * @var $block \Aimes\ProductGallery\Block\Gallery
  */
 ?>
-<div id="gallery-container" class="product-media loading" data-bind="scope: 'product-gallery'">
+<div id="gallery-container" class="gallery-container product-media loading" data-bind="scope: 'product-gallery'">
     <div id="gallery-preview" class="gallery-preview" data-bind="foreach: { data: galleryImages, as: 'image' }">
         <div class="gallery-cell"><img data-bind="attr: { 'data-flickity-lazyload': image.full, alt: image.caption }"/></div>
     </div>
@@ -32,7 +32,7 @@
 <script type="text/x-magento-init">
     {
         "#gallery-container": {
-            "aimes/productGallery": {
+            "aimes/product-gallery": {
             }
         }
     }
