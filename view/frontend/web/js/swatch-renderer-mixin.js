@@ -49,7 +49,8 @@ define([
              * Give knockout the new image data and reinitialise gallery settings
              */
             _updateProductGallery: function (images) {
-                var GalleryModel = new galleryModel();
+                var self = this,
+                    GalleryModel = new galleryModel();
 
                 images
                     ? GalleryModel.galleryImages(images)

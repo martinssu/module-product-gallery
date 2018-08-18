@@ -6,7 +6,9 @@ var config = {
     map: {
         '*': {
             'aimes/product-gallery': 'Aimes_ProductGallery/js/product-gallery',
-            'aimes/gallery-model': 'Aimes_ProductGallery/js/model/gallery'
+            'aimes/product-gallery-video': 'Aimes_ProductGallery/js/product-gallery-video',
+            'aimes/gallery-model': 'Aimes_ProductGallery/js/model/gallery',
+            'vimeo/player': '//player.vimeo.com/api/player.js'
         }
     },
     config: {

@@ -37,6 +37,41 @@
       height: @nav-dot-height;
     }
   }
+
+  .gallery-cell {
+    width: 100%;
+    text-align: center;
+
+    &.video {
+      height: 100%;
+
+      iframe {
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    img {
+      max-height: @gallery-preview-max-height;
+    }
+  }
+
+  &.is-fullscreen {
+    z-index: 100;
+
+    .flickity-slider {
+      img {
+        max-height: 100vh;
+        display: block;
+        margin: auto;
+      }
+    }
+
+    .gallery-cell {
+      display: flex;
+      height: 100%;
+    }
+  }
 }
 
 .gallery-nav {
@@ -67,34 +102,5 @@
       height: 100%;
     }
   }
-
-  &.is-fullscreen {
-    z-index: 100;
-
-    .gallery-cell {
-      display: flex;
-      height: 100%;
-    }
-  }
 }
 
-.gallery-preview {
-  .gallery-cell {
-    width: 100%;
-    text-align: center;
-
-    img {
-      max-height: @gallery-preview-max-height;
-    }
-  }
-
-  &.is-fullscreen {
-    .flickity-slider {
-      img {
-        max-height: 100vh;
-        display: block;
-        margin: auto;
-      }
-    }
-  }
-}

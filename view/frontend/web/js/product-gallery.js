@@ -85,10 +85,6 @@ define([
         _onLoaded: function () {
             $(this.options.galleryContainerElement).removeClass('loading');
             $(this.options.galleryContainerElement).trigger('galleryLoaded');
-        },
-
-        onLoaded: function () {
-
         }
     });
 
