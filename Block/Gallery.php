@@ -83,7 +83,7 @@ class Gallery extends Template
         $images = $this->getProduct()->getMediaGalleryImages();
 
         foreach ($images as $image) {
-            array_push($imageArr, [
+            $imageArr[] = [
                 'src' => $image->getData('url'),
                 'thumb' => $this->imageHelper
                     ->init($this->getProduct(), 'product_page_image_small')
@@ -97,8 +97,21 @@ class Gallery extends Template
                     ->init($this->getProduct(), 'product_page_image_large')
                     ->setImageFile($image->getFile())
                     ->getUrl(),
-                'caption' => $image->getData('label')
-            ]);
+                'caption' => $image->getData('label') ? $image->getData('label') : $image->getVideoTitle(),
+                'videoUrl' => $image->getVideoUrl()
+            ];
+        }
+
+        if (empty($images)) {
+            $placeHolderSrc = $this->imageHelper->getDefaultPlaceholderUrl('image');
+            $imageArr[] = [
+                'src' => $placeHolderSrc,
+                'thumb' => $this->imageHelper->getDefaultPlaceholderUrl('thumbnail'),
+                'img' => $placeHolderSrc,
+                'full' => $placeHolderSrc,
+                'caption' => 'Placeholder Image',
+                'videoUrl' => null
+            ];
         }
 
         return $imageArr;
@@ -112,6 +125,23 @@ class Gallery extends Template
     public function getJsImages()
     {
         return $this->json->serialize($this->getProductImages());
+    }
+
+    /**
+     * Returns true if current product has a video
+     *
+     * @return bool
+     */
+    public function productHasVideo()
+    {
+        $images = $this->getProduct()->getMediaGalleryImages();
+        foreach ($images as $image) {
+            if ($image->getVideoUrl()) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
 

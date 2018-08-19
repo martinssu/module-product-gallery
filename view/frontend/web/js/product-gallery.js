@@ -20,21 +20,24 @@ define([
         _init: function () {
             var self = this;
 
-            // jQuery Bridget is packaged within flickity
-            // Load plugins that extend Flickity object
-            require([
-                'jquery-bridget/jquery-bridget',
-                'Aimes_ProductGallery/js/lib/flickity/plugin/sync',
-                'Aimes_ProductGallery/js/lib/flickity/plugin/fullscreen'
-            ], function(jQueryBridget) {
-                jQueryBridget( 'flickity', Flickity, $ );
+            $(self.options.galleryContainerElement).on('gallery.dataBound', function () {
+                // jQuery Bridget is packaged within flickity
+                // Load plugins that extend Flickity object
+                require([
+                    'jquery-bridget/jquery-bridget',
+                    'Aimes_ProductGallery/js/lib/flickity/plugin/sync',
+                    'Aimes_ProductGallery/js/lib/flickity/plugin/fullscreen'
+                ], function (jQueryBridget) {
 
-                $(self.options.galleryContainerElement).addClass('loading');
+                    jQueryBridget('flickity', Flickity, $);
 
-                self.setupGalleryPreview();
-                self.setupGalleryNav();
+                    $(self.options.galleryContainerElement).addClass('loading');
 
-                self._onLoaded();
+                    self.setupGalleryPreview();
+                    self.setupGalleryNav();
+
+                    self._onLoaded();
+                });
             });
         },
 
@@ -43,7 +46,7 @@ define([
 
             $(self.options.galleryPreviewElement).flickity({
                 fullscreen: true,
-                sync: '#gallery-nav',
+                sync: self.options.galleryNavElement,
                 lazyLoad: true,
                 imagesLoaded: true,
                 wrapAround: true,
@@ -84,11 +87,7 @@ define([
 
         _onLoaded: function () {
             $(this.options.galleryContainerElement).removeClass('loading');
-            $(this.options.galleryContainerElement).trigger('galleryLoaded');
-        },
-
-        onLoaded: function () {
-
+            $(this.options.galleryContainerElement).trigger('gallery.loaded');
         }
     });
 
