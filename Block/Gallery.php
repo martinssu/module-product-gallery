@@ -98,7 +98,7 @@ class Gallery extends Template
                     ->setImageFile($image->getFile())
                     ->getUrl(),
                 'caption' => $image->getData('label') ? $image->getData('label') : $image->getVideoTitle(),
-                'video' => $image->getVideoUrl()
+                'videoUrl' => $image->getVideoUrl()
             ];
         }
 
@@ -110,7 +110,7 @@ class Gallery extends Template
                 'img' => $placeHolderSrc,
                 'full' => $placeHolderSrc,
                 'caption' => 'Placeholder Image',
-                'video' => null
+                'videoUrl' => null
             ];
         }
 
