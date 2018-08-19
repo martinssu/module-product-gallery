@@ -15,7 +15,7 @@ define([
         _init: function () {
             var self = this;
 
-            $(self.element).on('galleryLoaded', function() {
+            $(self.element).on('gallery.loaded', function() {
                 self.setupVideoEvents();
             });
         },

@@ -8,7 +8,7 @@
  */
 ?>
 <div id="gallery-container" class="gallery-container product-media loading" data-bind="scope: 'product-gallery'">
-    <div id="gallery-preview" class="gallery-preview" data-bind="foreach: { data: galleryImages, as: 'image' }">
+    <div id="gallery-preview" class="gallery-preview" data-bind="foreach: { data: galleryImages, as: 'image' }, afterRender: initFlickity">
         <div class="gallery-cell" data-bind="css: { video: image.videoUrl }">
             <!-- ko if: image.videoUrl-->
             <iframe frameborder="0" data-bind="attr: { src: $parent.getVideoEmbedUrl(image.videoUrl), class: $parent.getService(image.videoUrl) }"></iframe>

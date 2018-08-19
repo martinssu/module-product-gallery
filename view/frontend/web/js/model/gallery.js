@@ -4,14 +4,16 @@
 
 define([
     'uiElement',
-    'ko'
-], function(Component, ko) {
+    'ko',
+    'jquery',
+], function(Component, ko, $) {
     'use strict';
 
     return Component.extend({
         galleryImages: ko.observable(),
         youtubeEmbedUrl: 'https://www.youtube.com/embed/',
         vimeoEmbedUrl: 'https://player.vimeo.com/video/',
+        galleryContainerElement: '#gallery-container',
 
         initialize: function () {
             var self = this;
@@ -37,6 +39,10 @@ define([
                 videoId = url.split('youtube.be/').pop();
                 return this.youtubeEmbedUrl + videoId + '?enablejsapi=1&rel=0&showinfo=0'
             }
+        },
+
+        initFlickity: function() {
+            $(this.galleryContainerElement).trigger('gallery.dataBound');
         },
 
         getService: function(url) {
