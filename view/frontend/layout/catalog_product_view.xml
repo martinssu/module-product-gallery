@@ -7,5 +7,12 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
+        <!-- Add custom gallery by redefining the block, replacing Fotorama -->
+        <referenceBlock name="product.info.media">
+            <block name="product.info.media.image"
+                   class="Aimes\ProductGallery\Block\Gallery"
+                   template="Aimes_ProductGallery::product-gallery.phtml">
+            </block>
+        </referenceBlock>
     </body>
 </page>
