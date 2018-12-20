@@ -14,9 +14,6 @@
       "homepage": "https://aimes.eu"
     }
   ],
-  "require": {
-    "magento/module-catalog": "~103.0.0^"
-  },
   "autoload": {
     "files": [ "registration.php" ],
     "psr-4": {
